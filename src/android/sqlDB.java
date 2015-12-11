@@ -134,7 +134,7 @@ public class sqlDB extends CordovaPlugin {
 							PluginResult.Status.NO_RESULT);
 					// TODO Auto-generated method stub
 					try {
-						dbhelper.createdatabase(dbpath);
+						dbhelper.createdatabaseFrom(dbpath, path);
 						plResult = new PluginResult(PluginResult.Status.OK);
 						callbackContext.sendPluginResult(plResult);
 					} catch (Exception e) {

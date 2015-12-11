@@ -2,6 +2,7 @@ package me.rahul.plugins.sqlDB;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -36,6 +37,35 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	private void copyDatabase(File database) throws IOException {
 		InputStream myInput = myContext.getAssets().open("www/"+sqlDB.dbname);
+		OutputStream myOutput = new FileOutputStream(database);
+		byte[] buffer = new byte[1024];
+		while ((myInput.read(buffer)) > -1) {
+			myOutput.write(buffer);
+		}
+
+		myOutput.flush();
+		myOutput.close();
+		myInput.close();
+
+	}
+
+
+	public void createdatabaseFrom(File dbPath, String path) throws IOException {
+
+		// Log.d("CordovaLog","Inside CreateDatabase = "+dbPath);
+		this.getReadableDatabase();
+		try {
+			copyDatabaseFrom(dbPath, path);
+		} catch (IOException e) {
+			throw new Error(
+					"Create Database Exception ============================ "
+							+ e);
+		}
+
+	}
+
+	private void copyDatabaseFrom(File database, Strin path) throws IOException {
+		InputStream myInput = new FileInputStream(path+"/"+sqlDB.dbname);
 		OutputStream myOutput = new FileOutputStream(database);
 		byte[] buffer = new byte[1024];
 		while ((myInput.read(buffer)) > -1) {
