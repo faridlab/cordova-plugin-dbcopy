@@ -64,7 +64,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	}
 
-	private void copyDatabaseFrom(File database, Strin path) throws IOException {
+	private void copyDatabaseFrom(File database, String path) throws IOException {
 		InputStream myInput = new FileInputStream(path+"/"+sqlDB.dbname);
 		OutputStream myOutput = new FileOutputStream(database);
 		byte[] buffer = new byte[1024];
